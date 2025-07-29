@@ -2,67 +2,58 @@ const esbuild = require('esbuild')
 const fs = require('fs')
 const path = require('path')
 
-console.log('Starting build process...')
+console.log('Building PeerTube Cookie Consent Plugin (ES6 Module)...')
 
-// Переходим в корневую директорию проекта (на уровень выше scripts)
+// Пути файлов
 const rootDir = path.join(__dirname, '..')
-const clientDir = path.join(rootDir, 'client')
+const sourceFile = path.join(rootDir, 'client', 'common-client-plugin.js')
 const distDir = path.join(rootDir, 'dist')
+const targetFile = path.join(distDir, 'common-client-plugin.js')
 
-console.log('Root directory:', rootDir)
-console.log('Client directory:', clientDir)
-console.log('Dist directory:', distDir)
-
-// Создаем директории если они не существуют
-if (!fs.existsSync(clientDir)) {
-  fs.mkdirSync(clientDir, { recursive: true })
-  console.log('Created client directory')
-}
-
+// Создаем папку dist если её нет
 if (!fs.existsSync(distDir)) {
   fs.mkdirSync(distDir, { recursive: true })
-  console.log('Created dist directory')
+  console.log('✅ Created dist directory')
 }
 
 // Проверяем что исходный файл существует
-const clientFile = path.join(clientDir, 'common-client-plugin.js')
-if (!fs.existsSync(clientFile)) {
-  console.error('Error: client/common-client-plugin.js not found!')
-  console.log('Please create this file first.')
-  console.log('Expected location:', clientFile)
+if (!fs.existsSync(sourceFile)) {
+  console.error('❌ Source file not found:', sourceFile)
+  console.log('Please create client/common-client-plugin.js first')
   process.exit(1)
 }
 
-// Собираем проект с правильными настройками для PeerTube
+// Собираем с правильными настройками для PeerTube ES6 модулей
 esbuild.build({
-  entryPoints: [clientFile],
+  entryPoints: [sourceFile],
   bundle: true,
-  outfile: path.join(distDir, 'common-client-plugin.js'),
-  format: 'cjs', // CommonJS формат для PeerTube
+  outfile: targetFile,
+  format: 'esm', // ES Module формат для современного PeerTube
   platform: 'browser',
-  target: ['es2017'],
-  minify: false, // Оставляем без минификации для отладки
+  target: ['es2020'], // Более современный target
+  minify: false,
   sourcemap: false,
-  // Важно: убираем globalName, так как PeerTube работает с CommonJS модулями
+  // Включаем все зависимости в bundle
+  external: [],
   banner: {
-    js: '// PeerTube Cookie Consent Plugin - Client Script'
+    js: '// PeerTube Cookie Consent Plugin - ES Module'
   }
 }).then(() => {
+  // Проверяем что файл создался
+  const stats = fs.statSync(targetFile)
+  
   console.log('✅ Build completed successfully!')
+  console.log(`📁 Source: ${sourceFile}`)
+  console.log(`📁 Target: ${targetFile}`)
+  console.log(`📊 Size: ${Math.round(stats.size / 1024)}KB`)
   
-  // Проверяем содержимое созданного файла
-  const outputFile = path.join(distDir, 'common-client-plugin.js')
-  const content = fs.readFileSync(outputFile, 'utf8')
-  
-  // Проверяем, что файл содержит правильный экспорт
-  if (content.includes('module.exports') && content.includes('register')) {
-    console.log('✅ Export validation passed - register function found')
+  // Проверяем содержимое на правильный экспорт
+  const content = fs.readFileSync(targetFile, 'utf8')
+  if (content.includes('export') && content.includes('register')) {
+    console.log('✅ ES6 export validation passed - register function found')
   } else {
-    console.warn('⚠️  Warning: register function might not be properly exported')
+    console.warn('⚠️  Warning: ES6 export might not be correct')
   }
-  
-  console.log('Generated:', outputFile)
-  console.log('File size:', Math.round(fs.statSync(outputFile).size / 1024) + 'KB')
   
 }).catch((error) => {
   console.error('❌ Build failed:', error)

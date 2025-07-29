@@ -1,7 +1,7 @@
 {
   "name": "peertube-plugin-cookie-consent",
-  "description": "Zeigt DSGVO-konformen Cookie-Banner und blockiert Statistik-Skripte bis zur Zustimmung.",
-  "version": "1.0.4",
+  "description": "GDPR/DSGVO compliant cookie consent banner for PeerTube instances with script blocking functionality",
+  "version": "1.0.10",
   "author": "yarkolife",
   "repository": {
     "type": "git",
@@ -9,6 +9,18 @@
   },
   "license": "AGPL-3.0",
   "bugs": "https://github.com/yarkolife/peertube-plugin-cookie-consent/issues",
+  "homepage": "https://github.com/yarkolife/peertube-plugin-cookie-consent",
+  "keywords": [
+    "peertube",
+    "plugin",
+    "cookie",
+    "consent",
+    "GDPR",
+    "DSGVO",
+    "TTDSG",
+    "privacy",
+    "banner"
+  ],
   "clientScripts": [
     {
       "script": "dist/common-client-plugin.js",
@@ -18,26 +30,25 @@
     }
   ],
   "css": [],
-  "peertubeUpdatePolicy": "automatic",
+  "library": "./main.js",
   "engine": {
     "peertube": ">=5.2.0"
   },
-  "homepage": "https://github.com/yarkolife/peertube-plugin-cookie-consent",
-  "keywords": [
-    "peertube",
-    "plugin",
-    "cookie",
-    "consent",
-    "GDPR",
-    "DSGVO"
+  "peertubeUpdatePolicy": "automatic",
+  "files": [
+    "main.js",
+    "dist/",
+    "README.md"
   ],
-  "library": "./main.js",
   "scripts": {
     "prepare": "npm run build",
     "build": "node ./scripts/build.js"
   },
   "staticDirs": {},
   "translations": {},
+  "dependencies": {
+    "universal-cookie": "^7.2.2"
+  },
   "devDependencies": {
     "esbuild": "^0.21.2"
   }
