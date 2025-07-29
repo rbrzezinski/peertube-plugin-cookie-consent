@@ -1,7 +1,7 @@
 {
   "name": "peertube-plugin-cookie-consent",
   "description": "GDPR/DSGVO compliant cookie consent banner for PeerTube instances with script blocking functionality",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "author": "yarkolife",
   "repository": {
     "type": "git",
