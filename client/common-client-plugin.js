@@ -22,6 +22,56 @@ function removeConsentCategories() {
   cookies.remove('cookieConsentCategories', { path: '/' })
 }
 
+// Google Consent Mode V2 helpers
+function ensureGtag () {
+  if (typeof window === 'undefined') return null
+
+  const w = window
+
+  if (typeof w.gtag === 'function') {
+    return w.gtag
+  }
+
+  w.dataLayer = w.dataLayer || []
+  function gtag () {
+    w.dataLayer.push(arguments)
+  }
+  w.gtag = gtag
+
+  return gtag
+}
+
+// Mapowanie wewnętrznych kategorii na sygnały Consent Mode V2
+// funktional  -> brak zgody na tracking (wszystko "denied")
+// statistik   -> analytics_storage: "granted"
+// marketing   -> ad_storage, ad_user_data, ad_personalization: "granted"
+function updateConsentModeFromCategories (categories) {
+  const gtag = ensureGtag()
+  if (!gtag) return
+
+  // Domyślnie wszystko zablokowane – zgodne z wymaganiami CMP / Consent Mode
+  const consent = {
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    ad_storage: 'denied',
+    analytics_storage: 'denied'
+  }
+
+  if (categories) {
+    if (categories.statistik === true) {
+      consent.analytics_storage = 'granted'
+    }
+
+    if (categories.marketing === true) {
+      consent.ad_storage = 'granted'
+      consent.ad_user_data = 'granted'
+      consent.ad_personalization = 'granted'
+    }
+  }
+
+  gtag('consent', 'update', consent)
+}
+
 function injectCss(css) {
   const style = document.createElement('style')
   style.innerHTML = css
@@ -63,6 +113,9 @@ function applyConsent(settings) {
   const scripts = safeParse(settings.scripts)
   const categories = getConsentCategories()
   if (!categories) return
+
+  // Aktualizacja Consent Mode V2, aby narzędzia Google respektowały wybory użytkownika
+  updateConsentModeFromCategories(categories)
 
   const allowed = []
   const keys = Object.keys(categories)
@@ -210,6 +263,7 @@ function showCookieSettings(settings) {
     }
     
     setConsentCategories(prefs, 180)
+    updateConsentModeFromCategories(prefs)
     overlay.remove()
     location.reload()
   }
@@ -358,6 +412,8 @@ function initCookieBanner(peertubeHelpers) {
     
     if (!settings || !settings.enableConsentBanner) {
       console.log('[Cookie Consent Plugin] Banner disabled in settings')
+      // Brak banera = brak zgody na dodatkowe kategorie z punktu widzenia Consent Mode
+      updateConsentModeFromCategories(null)
       return
     }
 
@@ -365,6 +421,8 @@ function initCookieBanner(peertubeHelpers) {
     const categories = getConsentCategories()
     if (categories) {
       console.log('[Cookie Consent Plugin] Consent already given:', categories)
+      // Przy istniejących preferencjach od razu ustawiamy Consent Mode V2
+      updateConsentModeFromCategories(categories)
       applyConsent(settings)
       addManageButton(settings)
       return
@@ -406,6 +464,7 @@ function initCookieBanner(peertubeHelpers) {
       function() {
         const allCategories = { funktional: true, statistik: true, marketing: true }
         setConsentCategories(allCategories, 180)
+        updateConsentModeFromCategories(allCategories)
         wrapper.remove()
         applyConsent(settings)
         addManageButton(settings)
@@ -418,6 +477,8 @@ function initCookieBanner(peertubeHelpers) {
       function() {
         const essentialOnly = { funktional: true, statistik: false, marketing: false }
         setConsentCategories(essentialOnly, 180)
+        // Z punktu widzenia Consent Mode – wszystko pozostaje "denied"
+        updateConsentModeFromCategories(essentialOnly)
         wrapper.remove()
         addManageButton(settings)
       }
