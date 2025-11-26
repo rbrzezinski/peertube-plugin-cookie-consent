@@ -1,10 +1,10 @@
 // PeerTube Cookie Consent Plugin - Client Script with Configurable Design
 import Cookies from 'universal-cookie'
 
-// Создаем экземпляр cookie manager
+// Tworzymy instancję menedżera plików cookie
 const cookies = new Cookies()
 
-// Упрощенные функции для работы с согласием
+// Uproszczone funkcje do pracy ze zgodą
 function getConsentCategories() {
   return cookies.get('cookieConsentCategories') || null
 }
@@ -300,7 +300,7 @@ function addManageButton(settings) {
   manageBtn.title = 'Zarządzaj ustawieniami plików cookie'
   
   if (buttonStyle.startsWith('icon-')) {
-    // Круглая кнопка с иконкой
+    // Okrągły przycisk z ikoną
     manageBtn.innerHTML = getManageButtonIcon(buttonStyle)
     manageBtn.style.cssText = `
       position: fixed;
@@ -319,7 +319,7 @@ function addManageButton(settings) {
       backdrop-filter: blur(10px);
     `
   } else {
-    // Текстовая кнопка
+    // Tekstowy przycisk
     manageBtn.textContent = 'Ustawienia plików cookie'
     const isSmall = buttonStyle === 'text-small'
     manageBtn.style.cssText = `
@@ -338,7 +338,7 @@ function addManageButton(settings) {
     `
   }
   
-  // Эффекты при наведении
+  // Efekty po najechaniu kursorem
   manageBtn.onmouseenter = function() {
     this.style.background = buttonColorHover
     if (buttonStyle.startsWith('icon-')) {
@@ -382,7 +382,7 @@ function createStyledButton(text, color, onClick) {
   return button
 }
 
-// Основная функция регистрации плагина
+// Główna funkcja rejestracji wtyczki
 function register({ registerHook, peertubeHelpers }) {
   console.log('[Cookie Consent Plugin] Register function called')
   
@@ -395,6 +395,16 @@ function register({ registerHook, peertubeHelpers }) {
 
   registerHook({
     target: 'action:application.init',
+    handler: function() {
+      console.log('[Cookie Consent Plugin] Application initialized!')
+      setTimeout(function() {
+        initCookieBanner(peertubeHelpers)
+      }, 1000)
+    }
+  })
+
+  registerHook({
+    target: 'action:embed.player.loaded',
     handler: function() {
       console.log('[Cookie Consent Plugin] Application initialized!')
       setTimeout(function() {
@@ -416,8 +426,8 @@ function initCookieBanner(peertubeHelpers) {
       updateConsentModeFromCategories(null)
       return
     }
-
-    // Проверяем согласие
+    
+    // Sprawdzamy zgodę
     const categories = getConsentCategories()
     if (categories) {
       console.log('[Cookie Consent Plugin] Consent already given:', categories)
@@ -427,11 +437,11 @@ function initCookieBanner(peertubeHelpers) {
       addManageButton(settings)
       return
     }
-
-    // Создаем баннер с настройками
+    
+    // Tworzymy baner z ustawieniami
     console.log('[Cookie Consent Plugin] Creating banner...')
     
-    // Добавляем CSS если есть
+    // Dodajemy CSS, jeśli został zdefiniowany
     if (settings.customCss) {
       injectCss(settings.customCss)
     }
@@ -504,5 +514,5 @@ function initCookieBanner(peertubeHelpers) {
   })
 }
 
-// ES6 экспорт для PeerTube 7.2.2
+// Eksport ES6 dla PeerTube 7.2.2
 export { register }

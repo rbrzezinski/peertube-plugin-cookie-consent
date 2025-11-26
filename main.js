@@ -1,7 +1,7 @@
 async function register({ registerSetting }) {
   console.log('[Cookie Consent Plugin] Registering server settings...')
   
-  // Основные настройки
+  // Podstawowe ustawienia
   registerSetting({
     name: 'enableConsentBanner',
     label: 'Wyświetl baner zgody',
@@ -18,7 +18,7 @@ async function register({ registerSetting }) {
     private: false
   })
   
-  // Настройки дизайна баннера
+  // Ustawienia wyglądu banera
   registerSetting({
     name: 'bannerBackgroundColor',
     label: 'Kolor tła banera',
@@ -37,7 +37,7 @@ async function register({ registerSetting }) {
     private: false
   })
   
-  // Настройки кнопок
+  // Ustawienia przycisków
   registerSetting({
     name: 'buttonAcceptColor',
     label: 'Kolor przycisku "Akceptuj wszystkie"',
@@ -65,7 +65,7 @@ async function register({ registerSetting }) {
     private: false
   })
   
-  // Настройки кнопки управления
+  // Ustawienia przycisku zarządzania
   registerSetting({
     name: 'manageButtonStyle',
     label: 'Styl przycisku zarządzania',
@@ -104,7 +104,7 @@ async function register({ registerSetting }) {
     private: false
   })
   
-  // Настройки модального окна
+  // Ustawienia okna modalnego
   registerSetting({
     name: 'modalAccentColor',
     label: 'Kolor akcentu pól wyboru w oknie modalnym',
@@ -123,7 +123,7 @@ async function register({ registerSetting }) {
     private: false
   })
   
-  // Настройки скриптов
+  // Ustawienia skryptów
   registerSetting({
     name: 'scripts',
     label: 'Skrypty ładowane po wyrażeniu zgody (format JSON)',
@@ -140,7 +140,7 @@ async function register({ registerSetting }) {
     private: false
   })
   
-  // Дополнительный CSS для продвинутых пользователей
+  // Dodatkowy CSS dla zaawansowanych użytkowników
   registerSetting({
     name: 'customCss',
     label: 'Dodatkowy kod CSS (dla ekspertów)',

@@ -25,7 +25,8 @@
     {
       "script": "dist/common-client-plugin.js",
       "scopes": [
-        "common"
+        "common",
+        "embed"
       ]
     }
   ],
