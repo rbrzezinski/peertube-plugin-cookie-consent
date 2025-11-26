@@ -4,7 +4,7 @@ async function register({ registerSetting }) {
   // Основные настройки
   registerSetting({
     name: 'enableConsentBanner',
-    label: 'Cookie-Banner anzeigen',
+    label: 'Wyświetl baner zgody',
     type: 'input-checkbox',
     default: true,
     private: false
@@ -12,70 +12,70 @@ async function register({ registerSetting }) {
   
   registerSetting({
     name: 'bannerMarkdown',
-    label: 'Banner-Inhalt (Markdown)',
+    label: 'Treść banera (Markdown)',
     type: 'markdown-text',
-    default: 'Diese Website verwendet Cookies.\n[Mehr erfahren](/datenschutz)',
+    default: 'Ta witryna korzysta z plików cookie.\n[Dowiedz się więcej](/datenschutz)',
     private: false
   })
   
   // Настройки дизайна баннера
   registerSetting({
     name: 'bannerBackgroundColor',
-    label: 'Hintergrundfarbe des Banners',
+    label: 'Kolor tła banera',
     type: 'input',
     default: '#000000',
-    descriptionHTML: 'Hex-Farbcode (z.B. #000000 für schwarz)',
+    descriptionHTML: 'Kod koloru HEX (np. #000000 dla czerni)',
     private: false
   })
   
   registerSetting({
     name: 'bannerTextColor',
-    label: 'Textfarbe des Banners',
+    label: 'Kolor tekstu banera',
     type: 'input',
     default: '#ffffff',
-    descriptionHTML: 'Hex-Farbcode (z.B. #ffffff für weiß)',
+    descriptionHTML: 'Kod koloru HEX (np. #ffffff dla bieli)',
     private: false
   })
   
   // Настройки кнопок
   registerSetting({
     name: 'buttonAcceptColor',
-    label: 'Farbe der "Alle akzeptieren" Taste',
+    label: 'Kolor przycisku "Akceptuj wszystkie"',
     type: 'input',
     default: '#28a745',
-    descriptionHTML: 'Hex-Farbcode für den grünen "Akzeptieren" Button',
+    descriptionHTML: 'Kod koloru HEX dla zielonego przycisku akceptacji',
     private: false
   })
   
   registerSetting({
     name: 'buttonEssentialColor',
-    label: 'Farbe der "Nur essentielle" Taste',
+    label: 'Kolor przycisku "Tylko niezbędne"',
     type: 'input',
     default: '#6c757d',
-    descriptionHTML: 'Hex-Farbcode für den grauen "Essentielle" Button',
+    descriptionHTML: 'Kod koloru HEX dla szarego przycisku niezbędnych',
     private: false
   })
   
   registerSetting({
     name: 'buttonSettingsColor',
-    label: 'Farbe der "Einstellungen" Taste',
+    label: 'Kolor przycisku "Ustawienia"',
     type: 'input',
     default: '#007bff',
-    descriptionHTML: 'Hex-Farbcode für den blauen "Einstellungen" Button',
+    descriptionHTML: 'Kod koloru HEX dla niebieskiego przycisku ustawień',
     private: false
   })
   
   // Настройки кнопки управления
   registerSetting({
     name: 'manageButtonStyle',
-    label: 'Stil der Verwaltungsschaltfläche',
+    label: 'Styl przycisku zarządzania',
     type: 'select',
     options: [
-      { label: 'Runde Schaltfläche mit Zahnrad-Symbol', value: 'icon-gear' },
-      { label: 'Runde Schaltfläche mit Cookie-Symbol', value: 'icon-cookie' },
-      { label: 'Runde Schaltfläche mit Einstellungs-Symbol', value: 'icon-settings' },
-      { label: 'Kleine Textschaltfläche', value: 'text-small' },
-      { label: 'Normale Textschaltfläche', value: 'text-normal' }
+      { label: 'Okrągły przycisk z ikoną koła zębatego', value: 'icon-gear' },
+      { label: 'Okrągły przycisk z ikoną ciasteczka', value: 'icon-cookie' },
+      { label: 'Okrągły przycisk z ikoną ustawień', value: 'icon-settings' },
+      { label: 'Mały przycisk tekstowy', value: 'text-small' },
+      { label: 'Zwykły przycisk tekstowy', value: 'text-normal' }
     ],
     default: 'icon-gear',
     private: false
@@ -83,22 +83,22 @@ async function register({ registerSetting }) {
   
   registerSetting({
     name: 'manageButtonColor',
-    label: 'Farbe der Verwaltungsschaltfläche',
+    label: 'Kolor przycisku zarządzania',
     type: 'input',
     default: '#007bff',
-    descriptionHTML: 'Hex-Farbcode für die Verwaltungsschaltfläche',
+    descriptionHTML: 'Kod koloru HEX dla przycisku zarządzania',
     private: false
   })
   
   registerSetting({
     name: 'manageButtonPosition',
-    label: 'Position der Verwaltungsschaltfläche',
+    label: 'Pozycja przycisku zarządzania',
     type: 'select',
     options: [
-      { label: 'Unten rechts', value: 'bottom-right' },
-      { label: 'Unten links', value: 'bottom-left' },
-      { label: 'Oben rechts', value: 'top-right' },
-      { label: 'Oben links', value: 'top-left' }
+      { label: 'Dół po prawej', value: 'bottom-right' },
+      { label: 'Dół po lewej', value: 'bottom-left' },
+      { label: 'Góra po prawej', value: 'top-right' },
+      { label: 'Góra po lewej', value: 'top-left' }
     ],
     default: 'bottom-right',
     private: false
@@ -107,26 +107,26 @@ async function register({ registerSetting }) {
   // Настройки модального окна
   registerSetting({
     name: 'modalAccentColor',
-    label: 'Akzentfarbe für Checkboxen im Modal',
+    label: 'Kolor akcentu pól wyboru w oknie modalnym',
     type: 'input',
     default: '#007bff',
-    descriptionHTML: 'Hex-Farbcode für Checkboxen und primäre Elemente',
+    descriptionHTML: 'Kod koloru HEX dla pól wyboru i elementów głównych',
     private: false
   })
   
   registerSetting({
     name: 'modalBorderRadius',
-    label: 'Rundung der Modal-Ecken (in px)',
+    label: 'Zaokrąglenie rogów okna modalnego (w px)',
     type: 'input',
     default: '12',
-    descriptionHTML: 'Wert in Pixeln (z.B. 12 für abgerundete Ecken)',
+    descriptionHTML: 'Wartość w pikselach (np. 12 dla zaokrąglonych rogów)',
     private: false
   })
   
   // Настройки скриптов
   registerSetting({
     name: 'scripts',
-    label: 'Skripte zum Laden nach Einwilligung (JSON-Format)',
+    label: 'Skrypty ładowane po wyrażeniu zgody (format JSON)',
     type: 'input-textarea',
     default: JSON.stringify([
       {
@@ -143,10 +143,10 @@ async function register({ registerSetting }) {
   // Дополнительный CSS для продвинутых пользователей
   registerSetting({
     name: 'customCss',
-    label: 'Zusätzlicher CSS-Code (für Experten)',
+    label: 'Dodatkowy kod CSS (dla ekspertów)',
     type: 'input-textarea',
     default: '',
-    descriptionHTML: 'Zusätzlicher CSS-Code für erweiterte Anpassungen',
+    descriptionHTML: 'Dodatkowy kod CSS dla zaawansowanych modyfikacji',
     private: false
   })
   

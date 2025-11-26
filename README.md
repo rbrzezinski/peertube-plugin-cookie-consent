@@ -1,100 +1,100 @@
 # peertube-plugin-cookie-consent
 
-Ein DSGVO- und TTDSG-konformer Cookie-Consent-Banner für PeerTube-Instanzen mit vollständig konfigurierbarem Design.
+Baner zgody na pliki cookie zgodny z RODO i TTDSG dla instancji PeerTube, z w pełni konfigurowalnym wyglądem.
 
-Dieses Plugin zeigt einen konfigurierbaren Cookie-Banner an, blockiert Tracking-Skripte (z. B. Matomo, Umami, Facebook Pixel) bis zur Zustimmung des Nutzers und ermöglicht eine feingranulare Auswahl nach Kategorien (essenzielle, funktionale, Statistik, Marketing).
-
----
-
-## 🛡️ Merkmale
-
-- ✅ **DSGVO/TTDSG-konform** (Deutschland)
-- 🍪 **Cookie-Banner** beim ersten Besuch mit drei Auswahlmöglichkeiten
-- 🎨 **Vollständig konfigurierbares Design** über die Admin-Oberfläche
-- 📦 **Cookie-Kategorien**: `funktional`, `statistik`, `marketing`
-- 📝 **Markdown-Unterstützung** für Bannertext
-- 🛠 **Verwaltung** über das PeerTube-Adminpanel
-- 🔐 **Sichere Speicherung** des Einwilligungsstatus (180 Tage)
-- ⚙️ **Verwaltungsschaltfläche** als Icon oder Text konfigurierbar
-- 🌈 **Moderne Benutzeroberfläche** mit Hover-Effekten und Animationen
-- 📱 **Responsive Design** für alle Geräte
+Wtyczka wyświetla konfigurowalny baner zgody, blokuje skrypty śledzące (np. Matomo, Umami, Facebook Pixel) do momentu udzielenia zgody przez użytkownika i umożliwia szczegółowy wybór kategorii (niezbędne, funkcjonalne, statystyczne, marketingowe).
 
 ---
 
-## 🎨 Design-Anpassungen
+## 🛡️ Cechy
 
-Das Plugin bietet umfangreiche Designoptionen direkt im PeerTube-Admin:
-
-### Banner-Anpassungen
-- **Hintergrundfarbe** des Cookie-Banners
-- **Textfarbe** des Banners
-- **Button-Farben** für alle drei Aktionen (Akzeptieren, Essentielle, Einstellungen)
-
-### Verwaltungsschaltfläche
-- **Stil-Optionen**:
-  - 🔧 Runde Schaltfläche mit Zahnrad-Symbol
-  - 🍪 Runde Schaltfläche mit Cookie-Symbol  
-  - 📋 Runde Schaltfläche mit Einstellungs-Symbol
-  - 📝 Kleine Textschaltfläche
-  - 📄 Normale Textschaltfläche
-- **Position**: Unten rechts/links, Oben rechts/links
-- **Farbanpassung** der Schaltfläche
-
-### Modal-Fenster
-- **Akzentfarbe** für Checkboxen und primäre Elemente
-- **Rundung der Ecken** (anpassbar in Pixeln)
-- **Moderne Typografie** mit verbesserter Lesbarkeit
+- ✅ **Zgodność z RODO/TTDSG** (Polska)
+- 🍪 **Baner cookie** przy pierwszej wizycie z trzema opcjami wyboru
+- 🎨 **W pełni konfigurowalny wygląd** z poziomu panelu administratora
+- 📦 **Kategorie ciasteczek**: `funktional`, `statistik`, `marketing`
+- 📝 **Obsługa Markdown** dla tekstu banera
+- 🛠 **Zarządzanie** z panelu administracyjnego PeerTube
+- 🔐 **Bezpieczne przechowywanie** statusu zgody (180 dni)
+- ⚙️ **Przycisk zarządzania** konfigurowalny jako ikona lub tekst
+- 🌈 **Nowoczesny interfejs** z efektami najechania i animacjami
+- 📱 **Responsywny design** dla wszystkich urządzeń
 
 ---
 
-## 🔧 Konfiguration
+## 🎨 Dostosowanie wyglądu
 
-Nach Installation erscheint das Plugin in den PeerTube-Einstellungen mit folgenden Optionen:
+Wtyczka oferuje szerokie możliwości konfiguracji bezpośrednio w panelu PeerTube:
 
-### Grundeinstellungen
+### Baner
+- **Kolor tła** banera cookie
+- **Kolor tekstu** banera
+- **Kolory przycisków** dla wszystkich trzech akcji (Akceptuj, Niezbędne, Ustawienia)
 
-| Einstellung | Typ | Beschreibung |
-|-------------|-----|--------------|
-| `enableConsentBanner` | Boolean | Aktiviert/Deaktiviert den Banner |
-| `bannerMarkdown` | Markdown | Textinhalt des Banners (mit Link-Unterstützung) |
+### Przycisk zarządzania
+- **Opcje stylu**:
+  - 🔧 Okrągły przycisk z ikoną koła zębatego
+  - 🍪 Okrągły przycisk z ikoną ciastka  
+  - 📋 Okrągły przycisk z ikoną ustawień
+  - 📝 Mały przycisk tekstowy
+  - 📄 Zwykły przycisk tekstowy
+- **Pozycja**: dół prawo/lewo, góra prawo/lewo
+- **Kolorystyka** przycisku
 
-### Design-Einstellungen
-
-| Einstellung | Typ | Beschreibung |
-|-------------|-----|--------------|
-| `bannerBackgroundColor` | Farbfeld | Hintergrundfarbe des Banners (Standard: #000000) |
-| `bannerTextColor` | Farbfeld | Textfarbe des Banners (Standard: #ffffff) |
-| `buttonAcceptColor` | Farbfeld | Farbe der "Alle akzeptieren" Taste (Standard: #28a745) |
-| `buttonEssentialColor` | Farbfeld | Farbe der "Nur essentielle" Taste (Standard: #6c757d) |
-| `buttonSettingsColor` | Farbfeld | Farbe der "Einstellungen" Taste (Standard: #007bff) |
-
-### Verwaltungsschaltfläche
-
-| Einstellung | Typ | Beschreibung |
-|-------------|-----|--------------|
-| `manageButtonStyle` | Auswahl | Stil der Verwaltungsschaltfläche (Icon oder Text) |
-| `manageButtonColor` | Farbfeld | Farbe der Verwaltungsschaltfläche |
-| `manageButtonPosition` | Auswahl | Position auf der Seite |
-
-### Modal-Einstellungen
-
-| Einstellung | Typ | Beschreibung |
-|-------------|-----|--------------|
-| `modalAccentColor` | Farbfeld | Akzentfarbe für Checkboxen (Standard: #007bff) |
-| `modalBorderRadius` | Zahl | Rundung der Modal-Ecken in Pixeln (Standard: 12) |
-
-### Erweiterte Einstellungen
-
-| Einstellung | Typ | Beschreibung |
-|-------------|-----|--------------|
-| `scripts` | JSON | Liste von Skripten zum Laden nach Zustimmung |
-| `customCss` | Textarea | Zusätzlicher CSS-Code für Experten |
+### Okno modalne
+- **Kolor akcentu** dla pól wyboru i elementów głównych
+- **Zaokrąglenie rogów** (konfigurowalne w pikselach)
+- **Nowoczesna typografia** z lepszą czytelnością
 
 ---
 
-## 📋 Skript-Konfiguration
+## 🔧 Konfiguracja
 
-Konfigurieren Sie Tracking-Skripte im JSON-Format:
+Po instalacji wtyczka pojawia się w ustawieniach PeerTube z następującymi opcjami:
+
+### Ustawienia podstawowe
+
+| Ustawienie | Typ | Opis |
+|------------|-----|------|
+| `enableConsentBanner` | Boolean | Włącza/wyłącza baner |
+| `bannerMarkdown` | Markdown | Treść banera (z obsługą linków) |
+
+### Ustawienia wyglądu
+
+| Ustawienie | Typ | Opis |
+|------------|-----|------|
+| `bannerBackgroundColor` | Pole koloru | Kolor tła banera (domyślnie #000000) |
+| `bannerTextColor` | Pole koloru | Kolor tekstu banera (domyślnie #ffffff) |
+| `buttonAcceptColor` | Pole koloru | Kolor przycisku "Akceptuj wszystkie" (domyślnie #28a745) |
+| `buttonEssentialColor` | Pole koloru | Kolor przycisku "Tylko niezbędne" (domyślnie #6c757d) |
+| `buttonSettingsColor` | Pole koloru | Kolor przycisku "Ustawienia" (domyślnie #007bff) |
+
+### Przycisk zarządzania
+
+| Ustawienie | Typ | Opis |
+|------------|-----|------|
+| `manageButtonStyle` | Lista wyboru | Styl przycisku zarządzania (ikona lub tekst) |
+| `manageButtonColor` | Pole koloru | Kolor przycisku zarządzania |
+| `manageButtonPosition` | Lista wyboru | Pozycja na stronie |
+
+### Ustawienia okna modalnego
+
+| Ustawienie | Typ | Opis |
+|------------|-----|------|
+| `modalAccentColor` | Pole koloru | Kolor akcentu dla pól wyboru (domyślnie #007bff) |
+| `modalBorderRadius` | Liczba | Zaokrąglenie rogów okna w pikselach (domyślnie 12) |
+
+### Ustawienia zaawansowane
+
+| Ustawienie | Typ | Opis |
+|------------|-----|------|
+| `scripts` | JSON | Lista skryptów ładowanych po wyrażeniu zgody |
+| `customCss` | Pole tekstowe | Dodatkowy kod CSS dla zaawansowanych użytkowników |
+
+---
+
+## 📋 Konfiguracja skryptów
+
+Skonfiguruj skrypty śledzące w formacie JSON:
 
 ```json
 [
@@ -119,27 +119,27 @@ Konfigurieren Sie Tracking-Skripte im JSON-Format:
 ]
 ```
 
-### Verfügbare Kategorien:
-- **`funktional`**: Immer aktiviert (technisch notwendig)
-- **`statistik`**: Analytics, Besucherstatistiken
-- **`marketing`**: Werbung, Tracking, Social Media
+### Dostępne kategorie:
+- **`funktional`**: Zawsze aktywna (technicznie konieczna)
+- **`statistik`**: Analityka, statystyki odwiedzin
+- **`marketing`**: Reklama, śledzenie, media społecznościowe
 
 ---
 
-## 🚀 Installation
+## 🚀 Instalacja
 
-### Über PeerTube Admin-Interface (empfohlen)
-1. Gehen Sie zu **Administration** → **Plugins & Themes**
-2. Suchen Sie nach `peertube-plugin-cookie-consent`
-3. Klicken Sie auf **Install**
-4. Konfigurieren Sie das Plugin in den Einstellungen
+### Przez interfejs administracyjny PeerTube (zalecane)
+1. Przejdź do **Administration** → **Plugins & Themes**
+2. Wyszukaj `peertube-plugin-cookie-consent`
+3. Kliknij **Install**
+4. Skonfiguruj wtyczkę w ustawieniach
 
-### Über npm
+### Przez npm
 ```bash
 npm install peertube-plugin-cookie-consent
 ```
 
-### Manuelle Installation
+### Instalacja ręczna
 ```bash
 cd /var/www/peertube/peertube-latest
 sudo -u peertube npm run plugin:install -- --npm-name peertube-plugin-cookie-consent
@@ -147,47 +147,46 @@ sudo -u peertube npm run plugin:install -- --npm-name peertube-plugin-cookie-con
 
 ---
 
-## 🎯 Verwendung
+## 🎯 Użycie
 
-1. **Installation** des Plugins über die PeerTube-Administration
-2. **Konfiguration** der Farben und Stile nach Ihren Wünschen
-3. **Einrichtung** der Tracking-Skripte im JSON-Format
-4. **Anpassung** des Banner-Texts mit Markdown
-5. **Speichern** der Einstellungen
+1. **Zainstaluj** wtyczkę przez administrację PeerTube
+2. **Skonfiguruj** kolory i style według własnych potrzeb
+3. **Dodaj** skrypty śledzące w formacie JSON
+4. **Dostosuj** tekst banera przy pomocy Markdown
+5. **Zapisz** ustawienia
 
-Das Plugin funktioniert sofort nach der Installation. Besucher sehen beim ersten Besuch den Cookie-Banner und können ihre Präferenzen auswählen.
-
----
-
-## 🔧 Technische Details
-
-- **PeerTube-Kompatibilität**: ≥ 5.2.0
-- **Moderne ES6-Module**: Optimiert für PeerTube 7.x
-- **Universal-Cookie**: Robuste Cookie-Verwaltung
-- **Responsive Design**: Funktioniert auf allen Geräten
-- **Accessibility**: Screen-Reader-freundlich
-- **Performance**: Minimaler JavaScript-Footprint
+Wtyczka działa natychmiast po instalacji. Odwiedzający zobaczą baner podczas pierwszej wizyty i będą mogli wybrać swoje preferencje.
 
 ---
 
-## 📝 Lizenz
+## 🔧 Szczegóły techniczne
 
-AGPL-3.0 - Siehe [LICENSE](LICENSE) Datei für Details.
-
----
-
-## 🤝 Beitragen
-
-Beiträge sind willkommen! Bitte erstellen Sie einen Pull Request oder öffnen Sie ein Issue.
-
-**Repository**: [https://github.com/yarkolife/peertube-plugin-cookie-consent](https://github.com/yarkolife/peertube-plugin-cookie-consent)
+- **Kompatybilność z PeerTube**: ≥ 5.2.0
+- **Nowoczesne moduły ES6**: zoptymalizowane dla PeerTube 7.x
+- **Universal-Cookie**: niezawodne zarządzanie plikami cookie
+- **Responsywny design**: działa na wszystkich urządzeniach
+- **Dostępność**: przyjazne dla czytników ekranu
+- **Wydajność**: minimalny narzut JavaScript
 
 ---
 
-## 📞 Support
+## 📝 Licencja
 
-Bei Fragen oder Problemen erstellen Sie bitte ein Issue im GitHub-Repository.
+AGPL-3.0 - zobacz plik [LICENSE](LICENSE) po szczegóły.
 
 ---
 
-*Entwickelt mit ❤️ für die PeerTube-Community*
+## 🤝 Współtworzenie
+
+Wkład jest mile widziany! Otwórz Pull Request lub zgłoś Issue.
+
+**Repozytorium**: [https://github.com/yarkolife/peertube-plugin-cookie-consent](https://github.com/yarkolife/peertube-plugin-cookie-consent)
+
+---
+
+## 📞 Wsparcie
+
+W razie pytań lub problemów utwórz Issue w repozytorium GitHub.
+---
+
+*Stworzone z ❤️ dla społeczności PeerTube*

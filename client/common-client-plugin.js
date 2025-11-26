@@ -54,7 +54,7 @@ function safeParse(jsonInput) {
   try {
     return JSON.parse(jsonInput)
   } catch (e) {
-    console.error('[Cookie Consent Plugin] Fehler beim Parsen von Skripten:', e)
+    console.error('[Cookie Consent Plugin] Błąd podczas parsowania skryptów:', e)
     return []
   }
 }
@@ -115,7 +115,7 @@ function showCookieSettings(settings) {
   const currentPrefs = getConsentCategories() || { funktional: true, statistik: false, marketing: false }
 
   const modalContent = `
-    <h2 style="color:#333;margin-top:0;margin-bottom:1.5em;font-size:1.4em;">Cookie-Einstellungen</h2>
+    <h2 style="color:#333;margin-top:0;margin-bottom:1.5em;font-size:1.4em;">Ustawienia plików cookie</h2>
     <style>
       .cookie-option {
         display: flex;
@@ -175,19 +175,19 @@ function showCookieSettings(settings) {
     <form id="cookie-categories-form">
       <div class="cookie-option">
         <input type="checkbox" class="cookie-checkbox" name="funktional" id="funktional" ${currentPrefs.funktional ? 'checked' : ''}>
-        <label class="cookie-label" for="funktional">Funktionalität</label>
+        <label class="cookie-label" for="funktional">Funkcjonalne</label>
       </div>
       <div class="cookie-option">
         <input type="checkbox" class="cookie-checkbox" name="statistik" id="statistik" ${currentPrefs.statistik ? 'checked' : ''}>
-        <label class="cookie-label" for="statistik">Statistik</label>
+        <label class="cookie-label" for="statistik">Statystyczne</label>
       </div>
       <div class="cookie-option">
         <input type="checkbox" class="cookie-checkbox" name="marketing" id="marketing" ${currentPrefs.marketing ? 'checked' : ''}>
-        <label class="cookie-label" for="marketing">Marketing</label>
+        <label class="cookie-label" for="marketing">Marketingowe</label>
       </div>
       <div class="cookie-buttons">
-        <button type="submit" class="cookie-btn-primary">Speichern</button>
-        <button type="button" id="cancelCookieSettings" class="cookie-btn-secondary">Abbrechen</button>
+        <button type="submit" class="cookie-btn-primary">Zapisz</button>
+        <button type="button" id="cancelCookieSettings" class="cookie-btn-secondary">Anuluj</button>
       </div>
     </form>
   `
@@ -243,7 +243,7 @@ function addManageButton(settings) {
   
   const manageBtn = document.createElement('button')
   manageBtn.id = 'cookie-manage-btn'
-  manageBtn.title = 'Cookie-Einstellungen verwalten'
+  manageBtn.title = 'Zarządzaj ustawieniami plików cookie'
   
   if (buttonStyle.startsWith('icon-')) {
     // Круглая кнопка с иконкой
@@ -266,7 +266,7 @@ function addManageButton(settings) {
     `
   } else {
     // Текстовая кнопка
-    manageBtn.textContent = 'Cookie-Einstellungen'
+    manageBtn.textContent = 'Ustawienia plików cookie'
     const isSmall = buttonStyle === 'text-small'
     manageBtn.style.cssText = `
       position: fixed;
@@ -397,11 +397,11 @@ function initCookieBanner(peertubeHelpers) {
       box-shadow: 0 -4px 16px rgba(0,0,0,0.3);
     `
 
-    const content = createElementFromMarkdown(settings.bannerMarkdown || 'Diese Website verwendet Cookies.')
+    const content = createElementFromMarkdown(settings.bannerMarkdown || 'Ta witryna korzysta z plików cookie.')
     content.style.cssText = 'margin-bottom: 15px; line-height: 1.4; font-size: 15px;'
 
     const btnAcceptAll = createStyledButton(
-      'Alle akzeptieren',
+      'Akceptuj wszystkie',
       settings.buttonAcceptColor || '#28a745',
       function() {
         const allCategories = { funktional: true, statistik: true, marketing: true }
@@ -413,7 +413,7 @@ function initCookieBanner(peertubeHelpers) {
     )
 
     const btnEssenzielle = createStyledButton(
-      'Nur essentielle Cookies',
+      'Tylko niezbędne pliki cookie',
       settings.buttonEssentialColor || '#6c757d',
       function() {
         const essentialOnly = { funktional: true, statistik: false, marketing: false }
@@ -424,7 +424,7 @@ function initCookieBanner(peertubeHelpers) {
     )
 
     const btnSettings = createStyledButton(
-      'Einstellungen',
+      'Ustawienia',
       settings.buttonSettingsColor || '#007bff',
       function() { showCookieSettings(settings) }
     )
